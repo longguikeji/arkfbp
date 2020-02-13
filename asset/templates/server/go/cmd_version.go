@@ -1,23 +1,24 @@
-package cmd
+package main
 
 import (
 	"fmt"
 
-	"git.intra.longguikeji.com/longguikeji/arkfbp-cli/version"
+	"git.intra.longguikeji.com/longguikeji/arkfbp-go-examples/version"
 	"github.com/spf13/cobra"
 )
 
 var versionCmd = &cobra.Command{
 	Use:   "version",
 	Short: "Print the version of arkfbp-cli",
-	Long:  `Print the version of arkfbp-cli.`,
+	Long:  `Print the version of ark.`,
 	PersistentPreRun: func(cmd *cobra.Command, args []string) {
 	},
 	Run: func(command *cobra.Command, args []string) {
-		fmt.Println("arkfbp version:", version.GetVersion())
+		fmt.Println("", version.GetVersion())
 	},
 }
 
 func init() {
 	RootCmd.AddCommand(versionCmd)
 }
+

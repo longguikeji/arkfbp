@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/rockl2e/arkfbp-cli/cmd"
+	"git.intra.longguikeji.com/longguikeji/arkfbp-cli/cmd"
 )
 
 func main() {

@@ -3,9 +3,18 @@ package server
 import (
 	"encoding/json"
 	"fmt"
-	"git.intra.longguikeji.com/longguikeji/arkfbp-go/flow"
 	"net/http"
+
+	"git.intra.longguikeji.com/longguikeji/arkfbp-go/intr"
+	mapset "github.com/deckarep/golang-set"
 )
+
+// Route ...
+type Route struct {
+	Name    string
+	Pattern string
+	Handler intr.IFlow
+}
 
 // HTTPServer ...
 type HTTPServer struct {
@@ -23,10 +32,15 @@ func (svr *HTTPServer) Serve(host string, port int) error {
 }
 
 // RegisterRoutes ...
-func (svr *HTTPServer) RegisterRoutes(handlers map[string]flow.IFlow) error {
-	for pattern, handler := range handlers {
-		http.HandleFunc(pattern, func(w http.ResponseWriter, req *http.Request) {
-			outputs := handler.Run()
+func (svr *HTTPServer) RegisterRoutes(routes []Route) error {
+	names := mapset.NewSet()
+
+	for _, r := range routes {
+		if names.Contains(r.Name) {
+			return fmt.Errorf("duplicated route name: %s", r.Name)
+		}
+		http.HandleFunc(r.Pattern, func(w http.ResponseWriter, req *http.Request) {
+			outputs := r.Handler.Run(nil)
 
 			if outputs != nil {
 				data, err := json.Marshal(outputs)
@@ -45,10 +59,6 @@ func (svr *HTTPServer) RegisterRoutes(handlers map[string]flow.IFlow) error {
 	}
 
 	return nil
-}
-
-func process(w http.ResponseWriter, req *http.Request) {
-
 }
 
 // NewHTTPServer ...

@@ -17,6 +17,7 @@ func createServerGoProject(home string, packageName string) {
 	writeFile(path.Join(home, "Makefile"), "asset/templates/server/go/Makefile", data)
 	writeFile(path.Join(home, "cmd_root.go"), "asset/templates/server/go/cmd_root.go", data)
 	writeFile(path.Join(home, "cmd_serve.go"), "asset/templates/server/go/cmd_serve.go", data)
+	writeFile(path.Join(home, "cmd_run.go"), "asset/templates/server/go/cmd_run.go", data)
 	writeFile(path.Join(home, "cmd_version.go"), "asset/templates/server/go/cmd_version.go", data)
 
 	writeFile(path.Join(home, "go.mod"), "asset/templates/server/go/go.mod", data)

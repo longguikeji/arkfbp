@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
+	"os"
 
-	"git.intra.longguikeji.com/longguikeji/arkfbp-go-examples/server"
+	"{{ .PackageName }}/server"
 	"github.com/spf13/cobra"
 )
 
@@ -20,7 +21,11 @@ var serveCmd = &cobra.Command{
 	},
 	Run: func(command *cobra.Command, args []string) {
 		svr := server.NewHTTPServer()
-		svr.RegisterRoutes(Routes())
+		if err := svr.RegisterRoutes(Routes()); err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
+
 		if err := svr.Serve(serverCmdParamHost, serveCmdParamPort); err != nil {
 			fmt.Println(err)
 		}

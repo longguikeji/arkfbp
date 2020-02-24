@@ -2,12 +2,18 @@ package main
 
 import (
 	"{{ .PackageName }}/flows/flow1"
-	"git.intra.longguikeji.com/longguikeji/arkfbp-go/flow"
+	"{{ .PackageName }}/server"
 )
 
 // Routes ...
-func Routes() map[string]flow.IFlow {
-	handlers := make(map[string]flow.IFlow)
-	handlers["/hello"] = flow1.New()
-	return handlers
+func Routes() []server.Route {
+	var routes = []server.Route{
+		server.Route{
+			Name:    "flows.flow1",
+			Pattern: "/hello",
+			Handler: flow1.New(),
+		},
+	}
+
+	return routes
 }

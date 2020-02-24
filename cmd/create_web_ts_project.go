@@ -21,6 +21,7 @@ func createWebTSProject(home string) {
 	writeFile(path.Join(home, "postcss.config.js"), "asset/templates/web/ts/postcss.config.js", data)
 	writeFile(path.Join(home, "README.md"), "asset/templates/web/ts/README.md", data)
 	writeFile(path.Join(home, "tsconfig.json"), "asset/templates/web/ts/tsconfig.json", data)
+	writeFile(path.Join(home, "vue.config.js"), "asset/templates/web/ts/vue.config.js", data)
 
 	os.Mkdir(path.Join(home, "public"), os.ModePerm)
 	writeFile(path.Join(home, "public", "favicon.ico"), "asset/templates/web/ts/public/favicon.ico", data)

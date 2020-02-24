@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"git.intra.longguikeji.com/longguikeji/arkfbp-go-examples/version"
+	"{{ .PackageName }}/version"
 	"github.com/spf13/cobra"
 )
 

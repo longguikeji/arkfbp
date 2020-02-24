@@ -1,4 +1,4 @@
-module git.intra.longguikeji.com/longguikeji/arkfbp-cli
+module github.com/longguikeji/arkfbp-cli
 
 go 1.12
 

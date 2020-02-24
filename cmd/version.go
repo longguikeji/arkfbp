@@ -3,7 +3,7 @@ package cmd
 import (
 	"fmt"
 
-	"git.intra.longguikeji.com/longguikeji/arkfbp-cli/version"
+	"github.com/longguikeji/arkfbp-cli/version"
 	"github.com/spf13/cobra"
 )
 

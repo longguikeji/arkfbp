@@ -6,10 +6,11 @@ import (
 	"os"
 	"path"
 
+	"time"
+
 	"github.com/longguikeji/arkfbp-cli/version"
 	"github.com/spf13/cobra"
 	"gopkg.in/yaml.v2"
-	"time"
 )
 
 var (
@@ -72,7 +73,8 @@ var createCmd = &cobra.Command{
 		data := make(map[string]interface{})
 
 		data["name"] = pName
-		data["version"] = version.GetFBPVersion()
+		data["arkfbpCliVersion"] = version.GetVersion()
+		data["arkfbpSpecVersion"] = version.GetArkFBPSpecVersion()
 		data["type"] = createParamType
 		data["language"] = createParamLanguage
 		if createParamPackageName != "" {
@@ -87,9 +89,9 @@ var createCmd = &cobra.Command{
 
 func init() {
 	createCmd.Flags().StringVarP(&createParamName, "name", "", "", "project name")
-	createCmd.Flags().StringVarP(&createParamType, "type", "", "", "project type, web | server")
-	createCmd.Flags().StringVarP(&createParamLanguage, "language", "", "", "project language, javascript | typescript | python | go | java")
-	createCmd.Flags().StringVarP(&createParamPackageName, "package-name", "", "", "package name: go | java")
+	createCmd.Flags().StringVarP(&createParamType, "type", "t", "", "project type, web | server")
+	createCmd.Flags().StringVarP(&createParamLanguage, "language", "l", "", "project language, javascript | typescript | python | go | java")
+	createCmd.Flags().StringVarP(&createParamPackageName, "package", "p", "", "package name: go | java")
 
 	createCmd.MarkFlagRequired("name")
 	createCmd.MarkFlagRequired("type")

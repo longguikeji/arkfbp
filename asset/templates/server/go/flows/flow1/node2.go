@@ -24,6 +24,5 @@ func (n Node2) Next() string {
 // Run ...
 func (n Node2) Run() interface{} {
 	fmt.Println("Node2 Run...")
-	fmt.Printf("i received inputs: %v\n", n.Inputs())
 	return nil
 }

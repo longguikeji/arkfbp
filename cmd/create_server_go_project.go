@@ -7,6 +7,21 @@ import (
 	"path"
 )
 
+// CreateServerGoFlow ...
+func CreateServerGoFlow(home string, packageName string, name string) error {
+	var data = make(map[string]interface{})
+	data["PackageName"] = packageName
+
+	os.Mkdir(path.Join(home, "flows", name), os.ModePerm)
+	writeFile(path.Join(home, "flows", name, "flow.go"), "asset/templates/server/go/flows/flow1/flow.go", data)
+	writeFile(path.Join(home, "flows", name, "graph.go"), "asset/templates/server/go/flows/flow1/graph.go", data)
+	writeFile(path.Join(home, "flows", name, "node1.go"), "asset/templates/server/go/flows/flow1/node1.go", data)
+	writeFile(path.Join(home, "flows", name, "node2.go"), "asset/templates/server/go/flows/flow1/node2.go", data)
+	writeFile(path.Join(home, "flows", name, "node3.go"), "asset/templates/server/go/flows/flow1/node3.go", data)
+
+	return nil
+}
+
 func createServerGoProject(home string, packageName string) {
 	var data = make(map[string]interface{})
 	data["PackageName"] = packageName
@@ -33,15 +48,7 @@ func createServerGoProject(home string, packageName string) {
 	writeFile(path.Join(home, "server", "http.go"), "asset/templates/server/go/server/http.go", data)
 
 	os.Mkdir(path.Join(home, "flows"), os.ModePerm)
-	os.Mkdir(path.Join(home, "flows", "flow1"), os.ModePerm)
-	writeFile(path.Join(home, "flows", "flow1", "flow.go"), "asset/templates/server/go/flows/flow1/flow.go", data)
-	writeFile(path.Join(home, "flows", "flow1", "graph.go"), "asset/templates/server/go/flows/flow1/graph.go", data)
-	writeFile(path.Join(home, "flows", "flow1", "node1.go"), "asset/templates/server/go/flows/flow1/node1.go", data)
-	writeFile(path.Join(home, "flows", "flow1", "node2.go"), "asset/templates/server/go/flows/flow1/node2.go", data)
-	writeFile(path.Join(home, "flows", "flow1", "node3.go"), "asset/templates/server/go/flows/flow1/node3.go", data)
-	writeFile(path.Join(home, "flows", "flow1", "node4.go"), "asset/templates/server/go/flows/flow1/node4.go", data)
-	writeFile(path.Join(home, "flows", "flow1", "node5.go"), "asset/templates/server/go/flows/flow1/node5.go", data)
-	writeFile(path.Join(home, "flows", "flow1", "node6.go"), "asset/templates/server/go/flows/flow1/node6.go", data)
+	CreateServerGoFlow(home, packageName, "flow1")
 
 	cmd := exec.Command("make")
 	cmd.Dir = home

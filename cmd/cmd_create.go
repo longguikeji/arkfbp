@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"fmt"
 	"io/ioutil"
 	"os"
 	"path"
@@ -27,8 +26,6 @@ var createCmd = &cobra.Command{
 	PersistentPreRun: func(cmd *cobra.Command, args []string) {
 	},
 	Run: func(command *cobra.Command, args []string) {
-		fmt.Println("arkfbp version:", version.GetVersion())
-
 		pName := path.Base(createParamName)
 
 		switch createParamType {

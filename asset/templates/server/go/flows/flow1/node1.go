@@ -3,7 +3,7 @@ package flow1
 import (
 	"fmt"
 
-	"git.intra.longguikeji.com/longguikeji/arkfbp-go/node"
+	"github.com/longguikeji/arkfbp-go/node"
 )
 
 // Node1 ...

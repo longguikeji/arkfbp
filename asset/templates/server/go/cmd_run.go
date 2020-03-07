@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"git.intra.longguikeji.com/longguikeji/arkfbp-go/intr"
+	"github.com/longguikeji/arkfbp-go/intr"
 	"github.com/spf13/cobra"
 )
 

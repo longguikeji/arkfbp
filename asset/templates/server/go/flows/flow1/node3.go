@@ -1,6 +1,6 @@
 package flow1
 
-import "git.intra.longguikeji.com/longguikeji/arkfbp-go/node"
+import "github.com/longguikeji/arkfbp-go/node"
 
 // Node3 ...
 type Node3 struct {

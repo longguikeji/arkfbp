@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"git.intra.longguikeji.com/longguikeji/arkfbp-go/intr"
 	mapset "github.com/deckarep/golang-set"
+	"github.com/longguikeji/arkfbp-go/intr"
 )
 
 // Route ...

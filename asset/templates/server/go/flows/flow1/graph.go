@@ -1,7 +1,7 @@
 package flow1
 
 import (
-	"git.intra.longguikeji.com/longguikeji/arkfbp-go/graph"
+	"github.com/longguikeji/arkfbp-go/graph"
 )
 
 func createGraph() *graph.Graph {

@@ -16,5 +16,7 @@ func writeFile(dest string, assetName string, data interface{}) {
 	tt.Parse(string(t))
 	tt.Execute(&b, data)
 
-	ioutil.WriteFile(dest, []byte(b.String()), 0644)
+	if err := ioutil.WriteFile(dest, []byte(b.String()), 0644); err != nil {
+		panic(err)
+	}
 }

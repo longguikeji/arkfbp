@@ -22,6 +22,20 @@ func CreateServerGoFlow(home string, packageName string, name string) error {
 	return nil
 }
 
+// CreateServerGoFlowNode ...
+func CreateServerGoFlowNode(home, packageName, flowName, id, className, baseClassName string) error {
+	data := make(map[string]interface{})
+	data["PackageName"] = packageName
+	data["FlowName"] = flowName
+	data["ID"] = id
+	data["ClassName"] = className
+	data["BaseClassName"] = baseClassName
+
+	dir := path.Join(home, "flows", flowName)
+	writeFile(path.Join(dir, id+".go"), "asset/templates/server/go/flows/flow1/node.tpl", data)
+	return nil
+}
+
 func createServerGoProject(home string, packageName string) {
 	var data = make(map[string]interface{})
 	data["PackageName"] = packageName

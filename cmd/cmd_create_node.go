@@ -49,6 +49,16 @@ var createNodeCmd = &cobra.Command{
 				createNodeParamBaseClassName,
 			)
 		}
+
+		if metaInfo.Type == "server" && (metaInfo.Language == "javascript" || metaInfo.Language == "js") {
+			createServerJSFlowNode(
+				projectHome,
+				createNodeParamFlowName,
+				createNodeParamID,
+				createNodeParamClassName,
+				createNodeParamBaseClassName,
+			)
+		}
 	},
 }
 

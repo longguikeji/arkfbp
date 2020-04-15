@@ -25,7 +25,7 @@ var createFlowCmd = &cobra.Command{
 		if len(args) > 0 {
 			flowName = args[0]
 		} else {
-			fmt.Fprintf(os.Stderr, "")
+			fmt.Fprintf(os.Stderr, "not enough arguments")
 			os.Exit(-1)
 		}
 
@@ -42,8 +42,14 @@ var createFlowCmd = &cobra.Command{
 			os.Exit(-1)
 		}
 
+		fmt.Fprintln(os.Stdout, metaInfo)
+
 		if metaInfo.Type == "server" && metaInfo.Language == "go" {
 			CreateServerGoFlow(projectHome, metaInfo.Package, flowName)
+		}
+
+		if metaInfo.Type == "server" && (metaInfo.Language == "javascript" || metaInfo.Language == "js") {
+			createServerJSFlow2(projectHome, flowName)
 		}
 	},
 }

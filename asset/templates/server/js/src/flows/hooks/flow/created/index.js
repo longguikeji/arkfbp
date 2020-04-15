@@ -5,15 +5,18 @@ import { Node1 } from './nodes/node1'
 
 export class Main extends Flow {
 
-    createGraph() {
-        const g = new Graph()
-        g.nodes = [
+    createNodes() {
+        return [
             {
                 cls: Node1,
-                id: 1,
+                id: '1',
             },
         ]
+    }
 
+    createGraph() {
+        const g = new Graph()
+        g.nodes = this.createNodes()
         return g
     }
 

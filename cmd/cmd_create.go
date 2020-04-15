@@ -21,8 +21,8 @@ var (
 
 var createCmd = &cobra.Command{
 	Use:   "create",
-	Short: "Create a arkfbp project",
-	Long:  `Create a arkfbp project.`,
+	Short: "Create an arkfbp project",
+	Long:  `Create an arkfbp project.`,
 	PersistentPreRun: func(cmd *cobra.Command, args []string) {
 	},
 	Run: func(command *cobra.Command, args []string) {

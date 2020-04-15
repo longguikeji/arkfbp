@@ -8,10 +8,7 @@ import { AppState } from 'arkfbp/lib/appState'
 import { runWorkflowByFile } from 'arkfbp/lib/flow'
 import { executeHook } from 'arkfbp/lib/hook'
 
-import Logger from './plugins/log'
 import { serve } from './server'
-
-ark.registerPlugin(Logger)
 
 function startServer(port, appState) {
     // console.info(`Serve on port ${port}.`)

@@ -1,8 +1,8 @@
 import { FunctionNode } from 'arkfbp/lib/functionNode'
 
-export class SayHi extends FunctionNode {
+export class Node1 extends FunctionNode {
 
     async run() {
-        console.info('hi hi hi')
+        console.info('helloworld')
     }
 }

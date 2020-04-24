@@ -26,14 +26,14 @@ var createNodeCmd = &cobra.Command{
 			projectHome string
 		)
 
-		projectHome = dotarkfbp.GetProjectAbsPath(".")
-		if !dotarkfbp.IsArkFbpProject(projectHome) {
+		projectHome = dotarkfbp.GetAppAbsPath(".")
+		if !dotarkfbp.IsApp(projectHome) {
 			fmt.Fprintln(os.Stderr, "not an arkfbp project")
 			os.Exit(-1)
 		}
 
 		// load the project information from .arkfbp directory
-		metaInfo, err := dotarkfbp.LoadMetaInfo(projectHome)
+		metaInfo, err := dotarkfbp.LoadAppInfo(projectHome)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, "the .arkfbp directory is broken, please do the manual check")
 			os.Exit(-1)

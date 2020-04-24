@@ -15,9 +15,9 @@ var (
 
 // RootCmd represents the base command when called without any subcommands
 var RootCmd = &cobra.Command{
-	Use:   "arkfbp-cli",
-	Short: "arkfbp-cli is the command line tools for arkfbp .",
-	Long:  `arkfbp-cli is the command line tools for arkfbp .`,
+	Use:   "arkfbp",
+	Short: "arkfbp is the standard tooling tools of arkfbp.",
+	Long:  `arkfbp is the standard tooling tools of arkfbp.`,
 	PersistentPreRun: func(cmd *cobra.Command, args []string) {
 	},
 }

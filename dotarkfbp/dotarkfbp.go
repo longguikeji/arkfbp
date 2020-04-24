@@ -6,14 +6,15 @@ import (
 	"os"
 	"path"
 
+	"github.com/longguikeji/arkfbp-cli/constants"
 	"gopkg.in/yaml.v2"
 )
 
 // DotArkFbpDir is the meta folder of the arkfbp project
 const DotArkFbpDir = ".arkfbp"
 
-// ArkFbpProject is the structure describing the arkfbp meta info
-type ArkFbpProject struct {
+// App is the structure describing the arkfbp meta info
+type App struct {
 	Name        string
 	Description string
 	CliVersion  string `yaml:"cliVersion,omitempty"`
@@ -31,8 +32,8 @@ func GetDotArkFbpConfigFile(home string) string {
 	return configFile
 }
 
-// IsArkFbpProject checks whether the project is an arkfbp project or not
-func IsArkFbpProject(home string) bool {
+// IsApp checks whether the project is an arkfbp project or not
+func IsApp(home string) bool {
 	dir := path.Join(home, DotArkFbpDir)
 	configFile := path.Join(dir, "config.yml")
 
@@ -47,9 +48,9 @@ func IsArkFbpProject(home string) bool {
 	return true
 }
 
-// LoadMetaInfo ...
-func LoadMetaInfo(home string) (*ArkFbpProject, error) {
-	if !IsArkFbpProject(home) {
+// LoadAppInfo ...
+func LoadAppInfo(home string) (*App, error) {
+	if !IsApp(home) {
 		return nil, errors.New("not an arkfbp project")
 	}
 
@@ -57,7 +58,7 @@ func LoadMetaInfo(home string) (*ArkFbpProject, error) {
 
 	data, err := ioutil.ReadFile(configFile)
 
-	var ret = ArkFbpProject{}
+	var ret = App{}
 
 	err = yaml.Unmarshal(data, &ret)
 	if err != nil {
@@ -67,8 +68,8 @@ func LoadMetaInfo(home string) (*ArkFbpProject, error) {
 	return &ret, nil
 }
 
-// GetProjectAbsPath ...
-func GetProjectAbsPath(p string) string {
+// GetAppAbsPath ...
+func GetAppAbsPath(p string) string {
 	if p == "" {
 		p = "."
 	}
@@ -79,4 +80,35 @@ func GetProjectAbsPath(p string) string {
 	}
 
 	return p
+}
+
+// GetAppRoot ...
+func GetAppRoot() string {
+	return GetAppAbsPath(".")
+}
+
+// GetDatabasesRoot ...
+func GetDatabasesRoot(app *App) (string, error) {
+	t, err := constants.UnifyAppType(app.Type)
+	if err != nil {
+		return "", err
+	}
+
+	l, err := constants.UnifyLanguageType(app.Language)
+	if err != nil {
+		return "", err
+	}
+
+	if t == constants.Server {
+		switch l {
+		case constants.Javascript, constants.Typescript:
+			return path.Join(GetAppRoot(), "src", "databases"), nil
+		case constants.Go:
+			return path.Join(GetAppRoot(), "databases"), nil
+		case constants.Python:
+			return path.Join(GetAppRoot(), "databases"), nil
+		}
+	}
+
+	return "", errors.New("failed to get the database root")
 }

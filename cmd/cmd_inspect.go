@@ -21,14 +21,14 @@ var inspectCmd = &cobra.Command{
 			p = args[0]
 		}
 
-		p = dotarkfbp.GetProjectAbsPath(p)
+		p = dotarkfbp.GetAppAbsPath(p)
 
-		if !dotarkfbp.IsArkFbpProject(p) {
+		if !dotarkfbp.IsApp(p) {
 			fmt.Fprintln(os.Stderr, "not an arkfbp project")
 			os.Exit(-1)
 		}
 
-		metaInfo, err := dotarkfbp.LoadMetaInfo(p)
+		metaInfo, err := dotarkfbp.LoadAppInfo(p)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, "the .arkfbp directory is broken, please do the manual check")
 			os.Exit(-1)

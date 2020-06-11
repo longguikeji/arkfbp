@@ -40,6 +40,9 @@ start(gAppState).then(() => {
         }).option('inputs', {
             default: null,
             describe: 'Data to set as the inputs',
+        }).option('inputs-format', {
+            default: 'JSON',
+            describe: 'The format of the inputs data, default to JSON',
         }).option('debug', {
             default: false,
             describe: 'Enable debug mode or not',
@@ -55,6 +58,10 @@ start(gAppState).then(() => {
         const flowDirectory = __dirname + '/flows'
         const flowFilename = flowDirectory + '/' + args.name
         const inputs = args.inputs
+        const inputsFormat = args.inputsFormat ? args.inputsFormat : undefined;
+        if (inputsFormat.toUpperCase() === 'JSON') {
+            inputs = JSON.parse(inputs);
+        }
         runWorkflowByFile(flowFilename, inputs, {
             appState: gAppState,
             debug: args.debug,

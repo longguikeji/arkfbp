@@ -1,0 +1,33 @@
+package cmd
+
+import (
+	"github.com/spf13/cobra"
+)
+
+var (
+	dbDSLParamDatabase string
+)
+
+var dbDSLCmd = &cobra.Command{
+	Use:   "generate",
+	Short: "Generate the DSL codes",
+	Long:  `Generate the DSL codes.`,
+	PersistentPreRun: func(cmd *cobra.Command, args []string) {
+	},
+	Run: func(command *cobra.Command, args []string) {
+		// get the app info
+
+		// get the database
+
+		// get all the tables
+
+		// generate the DSL codes
+
+	},
+}
+
+func init() {
+	dbDSLCmd.Flags().StringVarP(&dbDSLParamDatabase, "database", "", "", "database name")
+
+	dbCmd.AddCommand(dbDSLCmd)
+}

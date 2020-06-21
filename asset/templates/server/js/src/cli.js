@@ -24,27 +24,30 @@ async function start(appState) {
      * App的StartupFlow仅会在server启动的时候执行一次，你可以任意设置App的State
      * Server启动之后AppState会被引用
      */
-    await executeHook(appState, path.resolve(__dirname, '/flows/hooks/app/beforeStart'))
-    await executeHook(appState, path.resolve(__dirname, '/flows/hooks/app/started'))
+    await executeHook(appState, path.join(__dirname, '/flows/hooks/app/beforeStart'))
+    await executeHook(appState, path.join(__dirname, '/flows/hooks/app/started'))
 
     /**
      * 注册中间件
      */
 }
 
-if (fs.existsSync(path.resolve(__dirname, '/models/index.js')) {
-    // initialize the testDB
-    const { sequelize } = require('@/models')
-
-    if (process.env.MODE === 'test') {
-        sequelize.sync({ force: true })
-    } else {
-        sequelize.sync()
-    }
-}
-
-start(gAppState).then(() => {
+start(gAppState).then(async () => {
     // require('yargs')
+
+    await (async function () {
+        if (fs.existsSync(path.join(__dirname, '/models/index.js'))) {
+            // initialize the testDB
+            const { sequelize } = require('@/models')
+
+            if (process.env.MODE === 'test') {
+                await sequelize.sync({ force: true })
+            } else {
+                await sequelize.sync()
+            }
+        }
+    })()
+
     yargs.command('run', 'run flow', (yargs) => {
         yargs.option('name', {
             describe: 'Flow to execute',
